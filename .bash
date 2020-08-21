@@ -1,0 +1,7 @@
+export SLACK_CHANNEL_WEBHOOK="https://hooks.slack.com/services/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"
+export SLACK_ACCESS_TOKEN="xoxb-1216834186388-1234528675904-VfckB4sNQlyOKnWbOI7yBOfd"
+export DB_ADDRESS=127.0.0.1
+export DB_USER=root
+export DB_PASSWORD=Password
+export DB_NAME=iambot
+export DB_PORT=3306

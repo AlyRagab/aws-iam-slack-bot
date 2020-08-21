@@ -1,0 +1,23 @@
+	// Check if the user and group/s are existed
+		isExist := slackClient.svc.ListAWSUsersWithGroups()
+		for _, users := range isExist {
+			if users.UserName == user {
+				for _, groups := range users.Groups {
+					if groups == group {
+						input := &iam.AddUserToGroupInput{
+							GroupName: &group,
+							UserName:  &user,
+						}
+						_, err := slackClient.svc.Svc.AddUserToGroup(input)
+						if err != nil {
+							log.Println(err)
+						}
+						slackClient.SlackClient.SendMessage(slackClient.SlackClient.NewOutgoingMessage("Access Assigned Successfully ...", slackChannel))
+						return
+					}
+				}
+			}
+		}
+		slackClient.SlackClient.SendMessage(slackClient.SlackClient.NewOutgoingMessage("Not Valid User or Group ...", slackChannel))
+		return
+	}
