@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	helpMessage = `[Usage] ::.. A warning will be sent every 4h if you don't press keep <username> then after 1h all users FA access will be revoked`
+	helpMessage = `[Usage] ::.. A warning will be sent every day at 5h if you don't press keep <username> then after 1h all users admin access will be revoked`
 )
 
 // SlackClient for init sessions
@@ -46,7 +46,7 @@ func (slackClient *SlackClient) CreateSlackClient(token string, svc provider.SVC
 func buildText(AWSUsers []provider.AWSUser) string {
 	var text string
 	if len(AWSUsers) == 0 {
-		text = fmt.Sprint("There are no Users in the FA_Groups")
+		text = fmt.Sprint("There are no Users in the Admin_Groups")
 		return text
 	}
 	text = fmt.Sprint("<@channel> The below users will be removed from the Admin_Groups: \n ")
@@ -99,7 +99,6 @@ func (slackClient *SlackClient) RespondToEvents() {
 			}
 			message := strings.Replace(event.Msg.Text, botTagString, "", -1)
 			slackClient.botResponse(message, event.Channel)
-			//slackClient.revokeAll(message, event.Channel)
 		}
 	}
 }
