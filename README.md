@@ -18,7 +18,7 @@
 - When writing the command `keep <username>`or `keep <username1> <username2>` , it updates a column called `keep` with (1) integer which means to keep.
 - All users which ready to be revoked has the column “keep“ with value 0 by default.
 - Value 0 == revoke , 1 == keep
-- By the end of the revoke function execution , it will truncate the content of the tables , to be ready to get inserted by the warning again.
+- By the end of the revoke function execution , it will truncate the content of the table, to be ready to get inserted by the warning again.
 
 ### Prerequisites :
 - The table should be created as below as a prerequisites:
