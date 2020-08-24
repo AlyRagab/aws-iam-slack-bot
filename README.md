@@ -1,13 +1,17 @@
-# IAM Slack-bot
+# AWS Access Management by Slack Bot
 
 ## Slack-Bot is Managing AWS Access process as below : 
-- Warning message will be sent every day at 5PM.
-- If we write `keep <username>` or `keep <username1> <username2>` , the user/s will be kept till next day.
+- A warning message will be sent every day at 5PM listing all user/s with their associated group/s.
 - The revoke action will be done every day at 6PM.
-- At any time we can revoke all accesses by the command `revoke-all-from <username>`.
-- At any time we can assign a specific access to a user by the command `assign <username> <groupname>`
-- At any time we can revoke a specific permission from a user by `revoke <username> <groupname>`
 
+### Actions :
+- `keep <username>` or `keep <username1> <username2>` to keep the access to user/s between the warning message time and the revoke which is probably one hour
+- `assign <username> <groupname>` to assign an access to a user at any time in the day.
+- `revoke <username> <groupname>` to revoke specific access from a user at any time in the day.
+- `revoke-all-from <username>` to revoke all accesses from a user at any time in the day.
+
+### Notes:
+- The AWS Access Management is a group based access , so considering creating a group per AWS resource and attach the related access policy document to this particular group.
 - A limitation from AWS that the groups should not have any numbers as per this [Reference](https://docs.aws.amazon.com/IAM/latest/APIReference/API_AddUserToGroup.html)
 - The Bot is removing users from admin groups by checking "^admin" regex only like `admin_dns , admin_RDS , admin_compute ..etc`.
 - After the Revoke action is done , It lists all users again with their current group/s.
@@ -16,8 +20,8 @@
 - Value 0 == revoke , 1 == keep
 - By the end of the revoke function execution , it will truncate the content of the tables , to be ready to get inserted by the warning again.
 
-### The table should be created as below:
-
+### Prerequisites :
+- The table should be created as below as a prerequisites:
 ```
 create table iambot (
     username varchar(60),
@@ -25,4 +29,23 @@ create table iambot (
     keep int NOT NULL,
     PRIMARY KEY (username)
 );
+```
+- Set the below environment variables as below:
+```
+SLACK_CHANNEL_WEBHOOK
+SLACK_ACCESS_TOKEN
+DB_NAME
+DB_PORT
+DB_PASSWORD
+DB_ADDRESS
+DB_USER
+AWS_REGION
+```
+- you probably can access the AWS CLI by the `aws configure` command before.
+- As recommended you just need to set the proper access permissions the bot just needs as below:
+```
+- iam:List
+- iam:AddUserToGroup
+- iam:RemoveUserFromGroup
+- iam:Get 
 ```
