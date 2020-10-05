@@ -1,4 +1,4 @@
-# AWS Access Management by Slack Bot
+# AWS Access Management (IAM) by Slack Bot
 
 ## Slack-Bot is Managing AWS Access process as below : 
 - A warning message will be sent every day at 5PM listing all user/s with their associated group/s.
