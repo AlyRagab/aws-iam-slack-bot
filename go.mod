@@ -6,6 +6,6 @@ require (
 	github.com/aws/aws-sdk-go v1.43.17
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/robfig/cron v1.2.0
-	github.com/slack-go/slack v0.6.5
+	github.com/slack-go/slack v0.10.2
 	github.com/stretchr/testify v1.5.1 // indirect
 )
