@@ -5,7 +5,7 @@ updates:
   schedule:
     interval: monthly
   open-pull-requests-limit: 10
-- package-ecosystem: github-actions
+- package-ecosystem: docker
   directory: "/"
   schedule:
     interval: monthly
