@@ -1,4 +1,4 @@
-FROM golang:1.19.1-alpine as builder
+FROM golang:1.19.4-alpine as builder
 WORKDIR /go/src
 COPY . .
 RUN go build -o iambot .
